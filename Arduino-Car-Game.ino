@@ -121,20 +121,20 @@ void objsFall() {
 }
 
 void loop() {
-  int y = map(analogRead(J_VRY), 0, 1023, -1, 1);
-  float speed = y;
+  int x = map(analogRead(J_VRX), 0, 1023, -1, 2);
+  x = constrain(x, -1, 1);
+  int speed = x;
 
-  if (millis() - timer >= 1500) {
+  if (millis() - timer >= 500) {
     objsSpawn();
     timer = millis();
   }
-  
   if (millis() - timer2 >= 500) {
     objsFall();
     timer2 = millis();
-  }
-  
-  sp += speed;
+  }   
+
+  sp -= speed;
   sp = constrain(sp, 0, 7);
   
   delay(50);
